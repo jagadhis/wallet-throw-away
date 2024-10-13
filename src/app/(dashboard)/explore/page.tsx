@@ -1,18 +1,19 @@
 'use client'
 
 import {useEffect, useState} from 'react';
-import { Input } from '@/components/ui/input';
-import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
-import { Card } from '@/components/ui/card';
-import {Book, CheckCircle, AlertCircle, Search, QrCode} from 'lucide-react';
+import {Input} from '@/components/ui/input';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
+import {Card} from '@/components/ui/card';
+import {AlertCircle, Book, CheckCircle, QrCode, Search} from 'lucide-react';
 import {Button} from "@/components/ui/button";
 import {Badge} from "@/components/ui/badge";
 import Link from 'next/link';
 import {subjectsData} from "@/data/subjects-data";
 import {departmentsData} from "@/data/department-data";
 import {batchesData} from "@/data/batches-data";
-import {getBadgesBySubjectAndUnit, getUnitsBySubjectId} from "@/lib/data-utils";
+import {getUnitsBySubjectId} from "@/lib/data-utils";
 import {semestersData} from "@/data/semester-data";
+import {badgesData} from "@/data/badges-data";
 
 export default function Explore() {
     const [selectedSubject, setSelectedSubject] = useState<number | null>(null);
@@ -24,17 +25,24 @@ export default function Explore() {
 
     const subjects = subjectsData;
     const units = selectedSubject !== null ? getUnitsBySubjectId(selectedSubject) : [];
-    const badges = selectedSubject !== null && selectedUnit !== null
-        ? getBadgesBySubjectAndUnit(selectedSubject, selectedUnit)
-        : [];
+    const badgesForSemester = badgesData.filter((badge) => {
+        const subject = subjects.find((subject) => subject.id === badge.subjectId);
+        return subject?.semester.toString() === semester;
+    });
+    const filteredBadges = badgesForSemester.filter((badge) => {
+        if (selectedSubject === null || selectedUnit === null) {
+            return true;
+        }
+        return badge.subjectId === selectedSubject && badge.unitId === selectedUnit;
+    });
     const filteredSubjects = subjectsData.filter((subject) =>
         (subject.department === department) &&
         (subject.semester.toString() === semester)
     );
     const analytics = {
         totalSubjects: subjects.length,
-        claimedBadges: badges.filter((badge) => badge.status === 'claimed').length,
-        needToClaimBadges: badges.filter((badge) => badge.status === 'need to claim').length,
+        claimedBadges: badgesForSemester.filter((badge) => badge.status === 'claimed').length,
+        needToClaimBadges: badgesForSemester.filter((badge) => badge.status === 'need to claim').length,
     };
 
     useEffect(() => {
@@ -59,7 +67,7 @@ export default function Explore() {
     }, []);
 
     return (
-        <div className="pt-20 pb-12">
+        <div className="pt-20 pb-20">
             <div className="relative mb-4">
                 <Input
                     placeholder="Search subjects..."
@@ -160,20 +168,20 @@ export default function Explore() {
                 </div>
             )}
 
-            {selectedSubject !== null && selectedUnit !== null && (
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                    {badges.map((badge) => (
+            {semester && (
+                <div className="grid grid-cols-2 gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 460px)' }}>
+                    {filteredBadges.map((badge) => (
                         <Link key={badge.id} href={`/badge/${badge.id}`}>
-                        <Card className="p-4 flex flex-col justify-between items-center cursor-pointer">
+                            <Card className="p-4 flex flex-col justify-between items-center cursor-pointer">
                                 <div className="flex flex-col items-center justify-center">
                                     <div className="relative w-12 h-12 flex items-center justify-center hexagon-border">
                                         <div className="w-8 h-8 flex items-center justify-center">
                                             <span className="text-sm font-bold">Badge</span>
                                         </div>
                                     </div>
-                                    <h3 className="mt-4 text-center text-sm font-bold">{badge.badgeName}</h3>
+                                    <h3 className="mt-4 text-center text-xs font-bold">{badge.badgeName}</h3>
                                 </div>
-                                <Button className={`mt-2 ${badge.status === 'claimed' ? 'bg-green-500' : 'bg-red-500'}`}>
+                                <Button size='sm' className={`mt-2 ${badge.status === 'claimed'}`}>
                                     {badge.status === 'claimed' ? 'Claimed' : 'Claim'}
                                 </Button>
                             </Card>
