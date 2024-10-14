@@ -1,0 +1,22 @@
+{
+  "name": "Digital Wallet",
+  "short_name": "GTM",
+  "description": "Wallet for micro badges",
+  "icons": [
+    {
+      "src": "/assets/digital-wallet-icon.jpeg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/digital-wallet-icon.jpeg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#001f3f",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#f3ec78"
+}
