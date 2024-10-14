@@ -5,9 +5,9 @@ export default function Document() {
         <Html lang="en">
             <Head>
                 <link rel="manifest" href="../app/manifest.json" />
-                <link rel="icon" href="../assets/digital-wallet-icon.jpeg" />
+                <link rel="icon" href="../../public/assets/digital-wallet-icon.jpeg" />
                 <meta name="theme-color" content="#000000" />
-                <link rel="apple-touch-icon" href="../assets/digital-wallet-icon.jpeg" />
+                <link rel="apple-touch-icon" href="../../public/assets/digital-wallet-icon.jpeg" />
             </Head>
             <body>
             <Main />

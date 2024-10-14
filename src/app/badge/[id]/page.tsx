@@ -11,7 +11,7 @@ import {timelineData} from "@/data/timeline-data";
 import {badgesData} from "@/data/badges-data";
 import {useParams} from "next/navigation";
 import {getSubjectsBySubjectId} from "@/lib/data-utils";
-import badgeImage from '@/assets/badge-general.jpeg';
+import badgeImage from '../../../../public/assets/badge-general.jpeg';
 
 type BadgeDetailsType = {
     id: number;
