@@ -14,6 +14,8 @@ import {batchesData} from "@/data/batches-data";
 import {getUnitsBySubjectId} from "@/lib/data-utils";
 import {semestersData} from "@/data/semester-data";
 import {badgesData} from "@/data/badges-data";
+import Image from "next/image";
+import badgeImage from "@/assets/badge-general.jpeg";
 
 export default function Explore() {
     const [selectedSubject, setSelectedSubject] = useState<number | null>(null);
@@ -174,15 +176,22 @@ export default function Explore() {
                         <Link key={badge.id} href={`/badge/${badge.id}`}>
                             <Card className="p-4 flex flex-col justify-between items-center cursor-pointer">
                                 <div className="flex flex-col items-center justify-center">
-                                    <div className="relative w-12 h-12 flex items-center justify-center hexagon-border">
-                                        <div className="w-8 h-8 flex items-center justify-center">
-                                            <span className="text-sm font-bold">Badge</span>
+                                    <div
+                                        className={`relative flex items-center justify-center hexagon-border ${
+                                            badge.badgeType === 'Super Badge' ? 'super-badge' : ''
+                                        }`}
+                                    >
+                                        <div className="w-12 h-12 flex items-center justify-center">
+                                            <Image src={badgeImage} alt={badge.badgeName}
+                                                   width={100}
+                                                   height={100}
+                                                   className="object-cover mx-auto"/>
                                         </div>
                                     </div>
                                     <h3 className="mt-4 text-center text-xs font-bold">{badge.badgeName}</h3>
                                 </div>
                                 <Button size='sm' className={`mt-2 ${badge.status === 'claimed'}`}>
-                                    {badge.status === 'claimed' ? 'Claimed' : 'Claim'}
+                                {badge.status === 'claimed' ? 'Claimed' : 'Claim'}
                                 </Button>
                             </Card>
                         </Link>

@@ -1,10 +1,9 @@
 'use client'
 
 import {useEffect, useState} from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import {ImageIcon} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Badge} from "@/components/ui/badge";
 import Image from "next/image";
 import {TimelineLayout} from "@/components/timeline-layout";
@@ -12,6 +11,7 @@ import {timelineData} from "@/data/timeline-data";
 import {badgesData} from "@/data/badges-data";
 import {useParams} from "next/navigation";
 import {getSubjectsBySubjectId} from "@/lib/data-utils";
+import badgeImage from '@/assets/badge-general.jpeg';
 
 type BadgeDetailsType = {
     id: number;
@@ -73,14 +73,17 @@ export default function BadgeDetails() {
             </div>
 
             <div className="my-6">
-                {badgeDetails.imageUrl ? (
-                    <Image src={badgeDetails.imageUrl} alt={badgeDetails.badgeName}
-                           className="w-40 h-40 object-cover mx-auto"/>
-                ) : (
-                    <div className="w-40 h-40 flex items-center justify-center bg-gray-200 rounded-lg mx-auto">
-                        <ImageIcon className="w-10 h-10 text-gray-500"/>
-                    </div>
-                )}
+                <div
+                    className={`badge-image-container ${badgeDetails.badgeType === 'Super Badge' ? 'super-badge' : ''}`}
+                >
+                    <Image
+                        src={badgeImage}
+                        alt={badgeDetails.badgeName}
+                        width={200}
+                        height={200}
+                        className="object-cover mx-auto"
+                    />
+                </div>
             </div>
             {passcodeVisible && (
                 <div className="mb-4">
@@ -120,7 +123,9 @@ export default function BadgeDetails() {
                 </TabsContent>
 
                 <TabsContent value="status">
-                    <TimelineLayout items={timelineData} />
+                    <div className="overflow-y-auto" style={{maxHeight: '250px'}}>
+                        <TimelineLayout items={timelineData}/>
+                    </div>
                 </TabsContent>
             </Tabs>
         </div>

@@ -84,7 +84,6 @@
   width: 100px;
   height: 55px;
   background-color: transparent;
-  border: 2px solid #64c7cc;
 }
 
 .hexagon-border:before,
@@ -100,4 +99,16 @@
 
 .hexagon-border:after {
   top: 100%;;
+}
+
+.super-badge {
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #f3ec78, #af4261, #00c6ff, #f3ec78);
+  border-image-slice: 1;
+}
+
+.badge-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
