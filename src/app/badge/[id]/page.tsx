@@ -116,7 +116,9 @@ export default function BadgeDetails() {
                 </TabsContent>
 
                 <TabsContent value="status">
-                    <TimelineLayout items={timelineData} />
+                    <div className="overflow-y-auto" style={{maxHeight: '250px'}}>
+                        <TimelineLayout items={timelineData}/>
+                    </div>
                 </TabsContent>
             </Tabs>
         </div>
