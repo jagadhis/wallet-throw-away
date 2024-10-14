@@ -72,7 +72,7 @@ export default function BadgeDetails() {
                 <p className="text-lg">{subjectDetails?.subCode}</p>
             </div>
 
-            <div className="my-6">
+            <div className="my-4">
                 <div
                     className={`badge-image-container ${badgeDetails.badgeType === 'Super Badge' ? 'super-badge' : ''}`}
                 >
@@ -86,7 +86,7 @@ export default function BadgeDetails() {
                 </div>
             </div>
             {passcodeVisible && (
-                <div className="mb-4">
+                <div className="mb-2">
                     <Input
                         placeholder="Enter passcode"
                         value={passcode}
@@ -96,11 +96,11 @@ export default function BadgeDetails() {
                     />
                 </div>
             )}
-            <Button onClick={handleClaimBadge} className="w-full mb-4">
+            <Button onClick={handleClaimBadge} className="w-full mb-2">
                 Claim My Badge
             </Button>
 
-            <Tabs defaultValue="description" className="mt-6">
+            <Tabs defaultValue="description" className="mt-2">
                 <TabsList className="grid grid-cols-3 w-full">
                     <TabsTrigger value="description">Description</TabsTrigger>
                     <TabsTrigger value="stats">Stats</TabsTrigger>
@@ -123,7 +123,7 @@ export default function BadgeDetails() {
                 </TabsContent>
 
                 <TabsContent value="status">
-                    <div className="overflow-y-auto" style={{maxHeight: '250px'}}>
+                    <div className="overflow-y-auto" style={{maxHeight: 'calc(100vh - 700px)'}}>
                         <TimelineLayout items={timelineData}/>
                     </div>
                 </TabsContent>

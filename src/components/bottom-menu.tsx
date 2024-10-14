@@ -4,7 +4,7 @@ import Link from "next/link";
 export const BottomMenu = () => {
     return (
         <nav
-            className="fixed bottom-0 left-0 w-full px-4 py-2 bg-background/70 backdrop-blur-sm rounded-t-lg border-t z-10">
+            className="sticky bottom-0 left-0 w-full px-4 py-2 bg-background/70 backdrop-blur-sm rounded-t-lg border-t z-10">
             <div className="flex justify-between items-center text-center">
 
                 <Link href="/explore" className="flex flex-col items-center group">
