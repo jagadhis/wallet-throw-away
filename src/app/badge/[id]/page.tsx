@@ -73,10 +73,17 @@ export default function BadgeDetails() {
             </div>
 
             <div className="my-6">
-                    <Image src={badgeImage} alt={badgeDetails.badgeName}
-                           width={200}
-                           height={200}
-                           className="object-cover mx-auto"/>
+                <div
+                    className={`badge-image-container ${badgeDetails.badgeType === 'Super Badge' ? 'super-badge' : ''}`}
+                >
+                    <Image
+                        src={badgeImage}
+                        alt={badgeDetails.badgeName}
+                        width={200}
+                        height={200}
+                        className="object-cover mx-auto"
+                    />
+                </div>
             </div>
             {passcodeVisible && (
                 <div className="mb-4">

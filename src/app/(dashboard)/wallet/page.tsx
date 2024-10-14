@@ -72,7 +72,11 @@ export default function Wallet() {
                     <Link key={badge.id} href={`/badge/${badge.id}`}>
                         <Card className="p-4 flex flex-col justify-between items-center cursor-pointer">
                             <div className="flex flex-col items-center justify-center">
-                                <div className="relative w-12 h-12 flex items-center justify-center hexagon-border">
+                                <div
+                                    className={`relative flex items-center justify-center hexagon-border ${
+                                        badge.badgeType === 'Super Badge' ? 'super-badge' : ''
+                                    }`}
+                                >
                                     <div className="w-12 h-12 flex items-center justify-center">
                                         <Image src={badgeImage} alt={badge.badgeName}
                                                width={100}
