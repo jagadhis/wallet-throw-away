@@ -7,7 +7,6 @@ export const badgesData = [
         description:
             "Awarded for mastering the concepts of Continuous Time (CT) and Discrete Time (DT) signals and their classification.",
         badgeType: "Super Badge",
-
         status: 'live'
     },
     {

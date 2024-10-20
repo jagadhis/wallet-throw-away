@@ -2,4 +2,7 @@
 node_modules
 .idea
 bun.lockb
-.
+/public/service-worker.js.map
+/public/workbox-bd7e3b9b.js
+/public/workbox-bd7e3b9b.js.map
+/public/service-worker.js
