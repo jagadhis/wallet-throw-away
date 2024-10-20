@@ -11,7 +11,8 @@ import {timelineData} from "@/data/timeline-data";
 import {badgesData} from "@/data/badges-data";
 import {useParams} from "next/navigation";
 import {getSubjectsBySubjectId} from "@/lib/data-utils";
-import badgeImage from '../../../../public/assets/badge-general.jpeg';
+import {QRCodeCanvas} from 'qrcode.react';
+import badgeImage from '../../../../public/assets/badge-general.png';
 
 type BadgeDetailsType = {
     id: number;
@@ -35,6 +36,7 @@ export default function BadgeDetails() {
     const [passcode, setPasscode] = useState('');
     const [badgeDetails, setBadgeDetails] = useState<BadgeDetailsType | null>(null);
     const [subjectDetails, setSubjectDetails] = useState<SubjectDetailsType | null>(null);
+    const [flipped, setFlipped] = useState(false);
 
     const params = useParams();
     const badgeId = Array.isArray(params?.id) ? params.id[0] : params?.id;
@@ -64,6 +66,13 @@ export default function BadgeDetails() {
         return <p>Loading...</p>;
     }
 
+    const qrCodeData = JSON.stringify({
+        badgeName: badgeDetails.badgeName,
+        badgeType: badgeDetails.badgeType,
+        subCode: subjectDetails?.subCode
+    });
+
+
     return (
         <div className="pt-20 pb-12">
             <h1 className="text-3xl font-bold mb-4">{badgeDetails.badgeName}</h1>
@@ -72,17 +81,25 @@ export default function BadgeDetails() {
                 <p className="text-lg">{subjectDetails?.subCode}</p>
             </div>
 
-            <div className="my-4">
+            <div className="flip-card-container">
                 <div
-                    className={`badge-image-container ${badgeDetails.badgeType === 'Super Badge' ? 'super-badge' : ''}`}
+                    className={`flip-card relative w-full h-64 ${badgeDetails.badgeType === 'Super Badge' ? 'super-badge' : ''}`}
+                    onClick={() => setFlipped(!flipped)}
                 >
-                    <Image
-                        src={badgeImage}
-                        alt={badgeDetails.badgeName}
-                        width={200}
-                        height={200}
-                        className="object-cover mx-auto"
-                    />
+                    <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
+                        <div className="flip-card-front">
+                            <Image
+                                src={badgeImage}
+                                alt={badgeDetails.badgeName}
+                                width={200}
+                                height={200}
+                                className="object-cover mx-auto"
+                            />
+                        </div>
+                        <div className="flip-card-back bg-white flex items-center justify-center rounded-lg">
+                            <QRCodeCanvas value={qrCodeData} size={180}/>
+                        </div>
+                    </div>
                 </div>
             </div>
             {passcodeVisible && (
