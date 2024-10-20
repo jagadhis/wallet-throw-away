@@ -9,7 +9,7 @@ import {QrCode, Search} from "lucide-react";
 import Link from "next/link";
 import {badgesData} from "@/data/badges-data";
 import Image from "next/image";
-import badgeImage from "../../../../public/assets/badge-general.jpeg";
+import badgeImage from "../../../../public/assets/badge-general.png";
 
 export default function Wallet() {
     const [selectedTab, setSelectedTab] = useState('live');

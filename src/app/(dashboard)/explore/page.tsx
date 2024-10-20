@@ -15,7 +15,7 @@ import {getUnitsBySubjectId} from "@/lib/data-utils";
 import {semestersData} from "@/data/semester-data";
 import {badgesData} from "@/data/badges-data";
 import Image from "next/image";
-import badgeImage from "../../../../public/assets/badge-general.jpeg";
+import badgeImage from "../../../../public/assets/badge-general.png";
 
 export default function Explore() {
     const [selectedSubject, setSelectedSubject] = useState<number | null>(null);
