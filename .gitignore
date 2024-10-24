@@ -6,3 +6,7 @@ bun.lockb
 /public/workbox-bd7e3b9b.js
 /public/workbox-bd7e3b9b.js.map
 /public/service-worker.js
+
+# misc
+/public/.DS_Store
+/public/assets/.DS_Store
